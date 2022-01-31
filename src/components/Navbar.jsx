@@ -10,10 +10,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 
-// import { makeStyles } from '@mui/material';
-
-// import useStyles from './../style/navbar'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,13 +56,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
-//   const classes = useStyles()
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar 
         position="static" 
-        // className={classes.appBar}
+
       >
         <Toolbar>
         {/* <Link 
@@ -76,7 +73,9 @@ export default function SearchAppBar() {
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             Explore
+            
           </Typography>
+
           {/* </Link> */}
           <Search>
             <SearchIconWrapper>

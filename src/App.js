@@ -8,6 +8,10 @@ import Navbar from './components/Navbar'
 import Posts from './components/Posts';
 import Followers from './components/Followers';
 import Profile from './components/Profile';
+import SignUp from './components/SignUp'
+import SignIn from './components/SignIn'
+import About from './components/About'
+import Post from './components/Post'
 
 
 const theme = createTheme({
@@ -18,6 +22,10 @@ const theme = createTheme({
   }
 })
 
+
+
+
+
 function App() {
   return (
     <Container maxwidth="lg">
@@ -25,8 +33,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Posts />} />
-          <Route path="/followers" element={<Followers/>} />
-          <Route path="/profile" element={<Profile/>} />
+          <Route path="/followers" element={ <Followers/> } />
+          <Route path="/profile/:id" element={ <Profile/> } />
+          <Route path="/signup" element={ <SignUp /> } />
+          <Route path="/signin" element={ <SignIn /> } />
+          <Route path="/about" element={ <About /> } />
+          <Route path="/post/:id" element={ <Post /> } />
+          <Route path="/liked" element={ <Posts /> } />
 
           <Route path="*" element={<h4>Page Not Found</h4>} />
         </Routes>
