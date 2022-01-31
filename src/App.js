@@ -6,6 +6,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Navbar from './components/Navbar'
 import Posts from './components/Posts';
+import Followers from './components/Followers';
+import Profile from './components/Profile';
 
 
 const theme = createTheme({
@@ -23,6 +25,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Posts />} />
+          <Route path="/followers" element={<Followers/>} />
+          <Route path="/profile" element={<Profile/>} />
 
           <Route path="*" element={<h4>Page Not Found</h4>} />
         </Routes>

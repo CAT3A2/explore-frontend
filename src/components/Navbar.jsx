@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import Avatar from '@mui/material/Avatar';
 
 // import { makeStyles } from '@mui/material';
 
@@ -60,7 +61,7 @@ export default function SearchAppBar() {
 //   const classes = useStyles()
 
   return (
-    // <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar 
         position="static" 
         // className={classes.appBar}
@@ -93,10 +94,11 @@ export default function SearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
+              <Avatar alt="profile image" src="./../img/default-profile.png" /> 
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-    // </Box>
+   </Box>
   );
 }
