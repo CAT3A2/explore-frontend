@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,6 +9,10 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+
+// import { makeStyles } from '@mui/material';
+
+// import useStyles from './../style/navbar'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,27 +57,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+//   const classes = useStyles()
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    // <Box sx={{ flexGrow: 1 }}>
+      <AppBar 
+        position="static" 
+        // className={classes.appBar}
+      >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+        {/* <Link 
+            to="/"> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            Explore
           </Typography>
+          {/* </Link> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -82,8 +86,17 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
-    </Box>
+    // </Box>
   );
 }
