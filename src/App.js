@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-
-import './App.css';
-
-function App() {
-  return (
-    <>
-      
-    </>
-=======
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 // import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
@@ -33,9 +23,6 @@ const theme = createTheme({
 })
 
 
-
-
-
 function App() {
   return (
     <Container maxwidth="lg">
@@ -55,7 +42,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Container>
->>>>>>> navbar
   );
 }
 
