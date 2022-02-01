@@ -18,26 +18,26 @@ function Form() {
   //   email: yup.string().email(),
   // });
 
-
-  function handleChange(e) {
-    setFile(e.targetfiles[0])
-  }
-
   function handleSubmit(e) {
+    
     e.preventDefault()
     const url = 'http://localhost:3000/signup'
     const formData = new FormData()
     formData.append('file', file)
-    // formData.append('fileName', file.name)
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    }
-    axios.post(url, formData, config)
-      .then((response) => {
-        console.log(response.data)
-      })
+    formData.append('fileName', file.name)
+    formData.append('username', username)
+    formData.append('email', email)
+    formData.append('password', password)
+
+    // const config = {
+    //   headers: {
+    //     'content-type': 'multipart/form-data'
+    //   }
+    // }
+    // axios.post(url, formData, config)
+    //   .then((response) => {
+    //     console.log(response.data)
+    //   })
   }
 
   return (
@@ -69,7 +69,7 @@ function Form() {
 
         <div>
             <input 
-                type="tpassword"
+                type="password"
                 // validationSchema={schema}
                 id="password"
                 name="password"
@@ -77,9 +77,9 @@ function Form() {
                 value={password}
                 placeholder="Password"/>
         </div>
-        
+
         <div>
-        <input type="file" onChange={handleChange}/>
+            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
         </div>
 
         <button type="submit" > Upload </button>
