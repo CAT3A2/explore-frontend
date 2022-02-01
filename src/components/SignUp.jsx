@@ -1,99 +1,91 @@
-import React from 'react';
-import { useFormik, setFieldValue } from 'formik';
-import * as Yup from 'yup';
+import { useState } from 'react'
+import axios from 'axios'
+// import 'core-js/es6/promise';
+// import 'core-js/es6/set';
+// import 'core-js/es6/map';
+// import * as yup from 'yup';
 
-// import './Signup.css';
+function Form() {
 
-export default function SignUp() {
-  const formik = useFormik({
-    initialValues: {
-      username: '',
-      lastName: '',
-      email: '',
-      password: '',
-    },
-    validationSchema: Yup.object({
-      username: Yup.string()
-        .min(2, 'Must be at least 2 characters')
-        .max(15, 'Must be 15 caracthers or less')
-        .required('Required'),
-      email: Yup.string().email('Invalid email address').required('Required'),
-      password: Yup.string().min(6, 'Must be at least 6 characters'),
-    }),
-    onSubmit: (values) => {
-      console.log({
-          avatar: values.avatar
-      });
-    },
-  });
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [file, setFile] = useState()
+
+  // let schema = yup.object().shape({
+  //   username: yup.string().required(),
+  //   password: yup.string().required(),
+  //   email: yup.string().email(),
+  // });
+
+
+  function handleChange(e) {
+    setFile(e.targetfiles[0])
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const url = 'http://localhost:3000/signup'
+    const formData = new FormData()
+    formData.append('file', file)
+    // formData.append('fileName', file.name)
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    axios.post(url, formData, config)
+      .then((response) => {
+        console.log(response.data)
+      })
+  }
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="input-container">
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          placeholder="First Name"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.firstName}
-        />
-        {formik.touched.firstName || formik.errors.firstName ? (
-          <p> {formik.errors.firstName} </p>
-        ) : null}
-      </div>
 
-      <div className="input-container">
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          placeholder="Last Name"
-          onBlur={formik.handleBlurBlur}
-          onChange={formik.handleChange}
-          value={formik.values.lastName}
-        />
-        {formik.touched.lastName || formik.errors.lastName ? (
-          <p> {formik.errors.lastName} </p>
-        ) : null}
-      </div>
+    <div className="App">
+      <form onSubmit={handleSubmit}>
+        <h1> File upload </h1>
+        <div>
+            <input 
+                type="text"
+                // validationSchema={schema}
+                id="username"
+                name="username"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                placeholder="Username"/>
+        </div>
 
-      <div className="input-container">
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        {formik.touched.email || formik.errors.email ? (
-          <p> {formik.errors.email} </p>
-        ) : null}
-      </div>
+        <div>
+            <input 
+                type="email"
+                // validationSchema={schema}
+                id="email"
+                name="username"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Email"/>
+        </div>
 
-      <div className="input-container">
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-      </div>
+        <div>
+            <input 
+                type="tpassword"
+                // validationSchema={schema}
+                id="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Password"/>
+        </div>
+        
+        <div>
+        <input type="file" onChange={handleChange}/>
+        </div>
 
-      <div className="input-container">
-
-      <input id="file" name="file" type="file" onChange={(event) => {
-  setFieldValue("file", event.currentTarget.files[0]);
-}} />
-      </div>
-
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit" > Upload </button>
+      </form>
+    </div>
   );
 }
+
+export default Form;
