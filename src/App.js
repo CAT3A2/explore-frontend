@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-
-import './App.css';
-
-function App() {
-  return (
-    <>
-      
-    </>
-=======
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 // import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import Navbar from './components/Navbar'
 import Posts from './components/Posts';
 import Followers from './components/Followers';
 import Profile from './components/Profile';
-import SignUp from './components/SignUp'
+import SignUp from './components/SignupForm'
 import SignIn from './components/SignIn'
 import About from './components/About'
 import Post from './components/Post'
@@ -31,9 +22,6 @@ const theme = createTheme({
     }
   }
 })
-
-
-
 
 
 function App() {
@@ -55,7 +43,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Container>
->>>>>>> navbar
   );
 }
 
