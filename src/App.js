@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 // import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import Navbar from './components/Navbar'

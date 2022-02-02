@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 
 function SignupForm() {
@@ -36,11 +38,12 @@ function SignupForm() {
   }
 
   return (
-    <div className="App">
+<Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <h1> File upload </h1>
-        <div>
-          <input
+        <h1> Sign Up </h1>
+        <Form.Group className="mb-3">
+          <Form.Label > Username </Form.Label>
+          <Form.Control
             type="text"
             id="username"
             name="username"
@@ -49,10 +52,11 @@ function SignupForm() {
             {...register('username', { required: true, minLength: 2 })}
           />
           {errors.username && <p>Username must be at least 2 characters.</p>}
-        </div>
+        </Form.Group>
 
-        <div>
-          <input
+        <Form.Group>
+          <Form.Label > Email </Form.Label>
+          <Form.Control
             type="email"
             id="email"
             name="username"
@@ -61,10 +65,11 @@ function SignupForm() {
             {...register('email', { required: true })}
           />
           {errors.email && <p>Invalid email</p>}
-        </div>
+        </Form.Group>
 
-        <div>
-          <input
+        <Form.Group>
+        <Form.Label > Password </Form.Label>
+          <Form.Control
             type="password"
             id="password"
             name="password"
@@ -73,15 +78,17 @@ function SignupForm() {
             {...register('password', { required: true, minLength: 6 })}
           />
           {errors.password && <p>Password must be at least 6 characters</p>}
-        </div>
+        </Form.Group>
 
-        <div>
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-        </div>
+        <Form.Group>
+          <Form.Label > Password </Form.Label>
+          <Form.Control type="file" onChange={(e) => setFile(e.target.files[0])} />
+        </Form.Group>
 
-        <button type="submit"> Upload </button>
+        <Button type="submit"> Upload </Button>
       </Form>
-    </div>
+      </Container>
+
   );
 }
 
