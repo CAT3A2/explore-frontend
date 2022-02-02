@@ -8,7 +8,7 @@ import Navbar from './components/Navbar'
 import Posts from './components/Posts';
 import Followers from './components/Followers';
 import Profile from './components/Profile';
-import SignUp from './components/SignUp'
+import SignUp from './components/SignupForm'
 import SignIn from './components/SignIn'
 import About from './components/About'
 import Post from './components/Post'
