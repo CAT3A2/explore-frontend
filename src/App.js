@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
-// import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -13,15 +11,9 @@ import SignUp from './components/SignupForm'
 import SignIn from './components/SignIn'
 import About from './components/About'
 import Post from './components/Post'
+import './style/app.css'
 
 
-const theme = createTheme({
-  palette: {
-    secondary: {
-      main: '#E33E7F'
-    }
-  }
-})
 
 
 function App() {
