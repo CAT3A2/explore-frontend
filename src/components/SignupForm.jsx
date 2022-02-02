@@ -81,7 +81,7 @@ function SignupForm() {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label > Password </Form.Label>
+          <Form.Label > Profile Picture </Form.Label>
           <Form.Control type="file" onChange={(e) => setFile(e.target.files[0])} />
         </Form.Group>
 
