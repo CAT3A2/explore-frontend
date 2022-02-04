@@ -51,7 +51,7 @@ function SignupForm() {
             // validation
             {...register('username', { required: true, minLength: 2 })}
           />
-          {errors.username && <p>Username must be at least 2 characters.</p>}
+          {errors.username && <p className="danger"> Username must be at least 2 characters.</p>}
         </Form.Group>
 
         <Form.Group>
