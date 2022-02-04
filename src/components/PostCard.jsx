@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 
 export default function Post({ post }) {
+
   return (
     <Card style={{ maxWidth: '50rem' }}>
       <Link to={`/post/${post.id}`} >
