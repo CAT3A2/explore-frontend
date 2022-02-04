@@ -6,7 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 
 import PostCard from './PostCard';
 
-export default function Posts() {
+export default function Posts( ) {
   // const { state: { posts } } = useContext(ExploreContext)
   let posts = [
     {
@@ -45,7 +45,7 @@ export default function Posts() {
       <Stack gap={4}>
       {posts.map((post) => (
         <Row className="justify-content-center" key={post.id} item xs={12} sm={12}>
-          <PostCard post={post} />
+          <PostCard post={post}/>
         </Row>
       ))}
       </Stack>

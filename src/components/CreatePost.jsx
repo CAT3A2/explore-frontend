@@ -38,7 +38,8 @@ function CreatePost() {
   }
 
   return (
-<Container>
+<Container >
+  <div className="formCard"> 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1> New Post </h1>
         <Form.Group className="mb-3">
@@ -101,6 +102,7 @@ function CreatePost() {
 
         <Button type="submit"> Upload </Button>
       </Form>
+      </div>
       </Container>
 
   );

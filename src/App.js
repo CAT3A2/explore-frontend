@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {useState} from 'react'
 
 import Navbar from './components/Navbar'
 import Posts from './components/Posts';
@@ -11,10 +13,10 @@ import About from './components/About'
 import Post from './components/Post'
 import CreatePost from './components/CreatePost'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 function App() {
+
+ 
   return (
     <Container maxwidth="lg">
       <BrowserRouter>
