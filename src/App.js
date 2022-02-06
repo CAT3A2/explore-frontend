@@ -11,6 +11,7 @@ import SignUp from './components/SignupForm'
 import SignIn from './components/SignIn'
 import About from './components/About'
 import Post from './components/Post'
+import CreatePost from './components/CreatePost'
 import stateReducer from './stateReducer';
 import ExploreContext from './ExploreContext';
 import initialState from './initialState'
@@ -88,6 +89,7 @@ function App() {
             <Route path="/about" element={ <About /> } />
             <Route path="/post/:id" element={ <Post /> } />
             <Route path="/liked" element={ <Posts /> } />
+            <Route path="post/new" element={ <CreatePost />} />
 
             <Route path="*" element={<h4>Page Not Found</h4>} />
           </Routes>
