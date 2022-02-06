@@ -22,9 +22,10 @@ function CreatePost() {
     formData.append('image', image);
     console.log(data)
     // formData.append('fileName', file.name);
-    formData.append('', data.username);
-    formData.append('email', data.email);
-    formData.append('password', data.password);
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('destination', data.destination);
+    formData.append('tags', data.tags)
 
     const config = {
       headers: {
