@@ -13,7 +13,7 @@ export default function Post({ post }) {
 
   return (
     <Card style={{ maxWidth: '50rem' }}>
-      <Link to={`/post/${post.id}`} >
+      <Link to={`/post/${post.post_id}`} >
         <Card.Img variant="top" src={post.image} />
       </Link>
       <Card.Body>
@@ -26,12 +26,12 @@ export default function Post({ post }) {
             <Col xs={8}>
               <Card.Title> {post.title} </Card.Title>
               <Card.Text>{post.description}</Card.Text>
-              <Card.Text>{post.tags.map((tag) => `#${tag} `)}</Card.Text>
+              <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
             </Col>
             <Col xs={2}>
               <Button variant="light" onClick={() => {}}>
                 <FavoriteSharpIcon sx={{ color: red[700] }} />
-                Like
+                { !post.likes.length ? null : post.likes.length}
               </Button>
             </Col>
           </Row>
