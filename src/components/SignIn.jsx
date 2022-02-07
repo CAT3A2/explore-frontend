@@ -10,7 +10,7 @@ export default function SignIn() {
   const { register, handleSubmit, formState: {errors}} = useForm()
 
   function onSubmit(data) {
-    const url = 'http://localhost:3000/auth/signin';
+    const url = 'http://localhost:5500/auth/signin';
     console.log(data)
 
     // axios.post(url, data)

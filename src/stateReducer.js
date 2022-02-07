@@ -7,7 +7,7 @@ export default function (currentState, action) {
 
             }
 
-        case 'setAuthToken' :
+        case 'setToken' :
             return {
 
             }

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {useParams} from 'react-router-dom'
 import ExploreContext from "../ExploreContext";
 import Button from 'react-bootstrap/Button';
@@ -10,6 +10,7 @@ import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm'
 
 
 export default function Post(  ) {
@@ -20,7 +21,7 @@ export default function Post(  ) {
   const { store: { posts } } = useContext(ExploreContext)
   console.log(`Posts: ${posts}`)
 
-  const post = posts.find((p) => p.id == params.id);
+  const post = posts.find((post) => post.id === params.id);
 
   return post ? (
   
@@ -57,6 +58,7 @@ export default function Post(  ) {
             <br></br>
           </Card>
            ))} 
+        <CommentForm post_id={34}/>
       </ Container>
     </Card.Body>
   </Card>
