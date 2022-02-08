@@ -47,7 +47,8 @@ function SignupForm() {
         }
       ).catch((error) => {
         // this is not working
-        console.log(`Error: ${error.message}`);
+        // console.log(`Error: ${error}`);
+        console.log(error)
       });
     });
   }
