@@ -8,7 +8,6 @@ import axios from 'axios';
 export default function CommentForm( {post_id, user_id}) {
 
   const { register, handleSubmit, formState: {errors}} = useForm()
-  const params = useParams();
 
   async function onSubmit(data, post_id, user_id) {
     const url = 'http://localhost:5500/auth/signin';
