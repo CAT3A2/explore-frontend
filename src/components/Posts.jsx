@@ -45,7 +45,7 @@ export default function Posts( ) {
     <Container className="justify-content-center" >
       <Stack gap={4}>
       {posts.map((post) => (
-        <Row className="justify-content-center" key={post.id} item xs={12} sm={12}>
+        <Row className="justify-content-center" key={post.id} xs={12} sm={12}>
           <PostCard post={post}/>
         </Row>
       ))}
