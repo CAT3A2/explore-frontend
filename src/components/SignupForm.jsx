@@ -4,7 +4,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import initialState from './../initialState'
+import initialState from './../initialState';
 import stateReducer from './../stateReducer';
 
 function SignupForm() {
@@ -32,23 +32,22 @@ function SignupForm() {
         'content-type': 'multipart/form-data',
       },
     };
-    axios.post(url, formData, config)
-      .then((response) => {
+    axios.post(url, formData, config).then((response) => {
       console.log(response);
-        dispatch(
-          {
-            // store the access token that was returned with the response in global store
-            type: 'setToken',
-            data: response.accessToken,
-          },
-          {
-            // store the user information that was returned with the response in global store
-            type: 'setCurrentUser',
-            data: response.user,
-          }
-        ).catch((error) => {
-          // this is not working
-          console.log(`Error: ${error.message}`);
+      dispatch(
+        {
+          // store the access token that was returned with the response in global store
+          type: 'setToken',
+          data: response.accessToken,
+        },
+        {
+          // store the user information that was returned with the response in global store
+          type: 'setCurrentUser',
+          data: response.user,
+        }
+      ).catch((error) => {
+        // this is not working
+        console.log(`Error: ${error.message}`);
       });
     });
   }

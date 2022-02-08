@@ -2,7 +2,6 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
-import api from "../api";
 import {useParams} from 'react-router-dom'
 import axios from 'axios';
 
@@ -36,7 +35,7 @@ export default function CommentForm( {post_id} ) {
             placeholder="Comment"
             // validation
             {...register('comment', { required: true })}/>
-            {/* {errors.coment && <p className="error-message"> Required </p>} */}
+            {errors.coment && <p className="error-message"> Required </p>}
         </Form.Group>
         <Button type="submit"> Comment </Button>
       </Form>
