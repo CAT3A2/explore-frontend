@@ -24,6 +24,7 @@ export default function stateReducer(currentState, action) {
                 ...currentState,
                 posts: action.data
             }
+        default :
 
     }
 }
