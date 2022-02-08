@@ -12,6 +12,7 @@ import ExploreContext from '../ExploreContext';
 export default function SearchAppBar() {
 
   const { store: {currentUser}} = useContext(ExploreContext)
+  
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container>

@@ -19,13 +19,15 @@ function CreatePost() {
   function onSubmit(data) {
     const url = 'http://localhost:3000/createpost';
     const formData = new FormData();
+    // split tags from string into an array of strings
+    const tagArray = data.tags.split(/[\s,]+/)
+    console.log(`Tag array: ${tagArray}`)
     formData.append('image', image);
-    console.log(data)
     // formData.append('fileName', file.name);
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('destination', data.destination);
-    formData.append('tags', data.tags)
+    formData.append('tags', tagArray)
 
     const config = {
       headers: {
