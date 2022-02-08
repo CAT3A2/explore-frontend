@@ -22,14 +22,17 @@ import api from './api';
 function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
 
-  useEffect(async () => {
-    const res = await api.get('posts');
-    // const data = await res.json();
+  useEffect(() => {
+    async function fetchData() {
+      const res = await api.get('posts');
+      console.log(`Response: ${res}`)
+      dispatch({
+        type: 'setPosts',
+        data: res.data,
+      });
+    }
+    fetchData();
 
-    dispatch({
-      type: 'setPosts',
-      data: res.data,
-    });
   }, []);
 
   return (
