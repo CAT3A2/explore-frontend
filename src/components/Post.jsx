@@ -18,7 +18,7 @@ export default function Post(  ) {
   const params = useParams();
   console.log(`Params: ${params.id}`)
 
-  const { store: { posts } } = useContext(ExploreContext)
+  const { store: { posts, currentUser } } = useContext(ExploreContext)
   console.log(`Posts: ${posts}`)
 
   const post = posts.find((post) => post.id === params.id);
@@ -58,7 +58,7 @@ export default function Post(  ) {
             <br></br>
           </Card>
            ))} 
-        <CommentForm post_id={34}/>
+        <CommentForm post_id={post.id} user_id={currentUser.id}/>
       </ Container>
     </Card.Body>
   </Card>

@@ -5,14 +5,16 @@ import Button from 'react-bootstrap/Button';
 import {useParams} from 'react-router-dom'
 import axios from 'axios';
 
-export default function CommentForm( {post_id} ) {
+export default function CommentForm( {post_id, user_id}) {
 
   const { register, handleSubmit, formState: {errors}} = useForm()
   const params = useParams();
 
-  async function onSubmit(data, post_id) {
+  async function onSubmit(data, post_id, user_id) {
     const url = 'http://localhost:5500/auth/signin';
-    console.log(post_id)    
+    console.log(post_id + user_id)
+    data.append('post_id', post_id) 
+    data.append('user_id', user_id) 
 
     // const res = await api.post(`post/${post_id}`, {
     //     console.log(`Res: ${res}`)
