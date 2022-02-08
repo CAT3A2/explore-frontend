@@ -2,7 +2,6 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
-import {useParams} from 'react-router-dom'
 import axios from 'axios';
 
 export default function CommentForm( {post_id, user_id}) {
