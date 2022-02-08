@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+
+import ExploreContext from "../ExploreContext";
 
 
 function CreatePost() {
@@ -16,14 +18,14 @@ function CreatePost() {
     formState: { errors },
   } = useForm();
 
+  const {store: {currentUser, token}} = useContext(ExploreContext)
+
   function onSubmit(data) {
-    const url = 'http://localhost:3000/createpost';
+    const url = `http://localhost:3000/profile/${currentUser.user_id}/posts`;
     const formData = new FormData();
     // split tags from string into an array of strings
     const tagArray = data.tags.split(/[\s,]+/)
-    console.log(`Tag array: ${tagArray}`)
     formData.append('image', image);
-    // formData.append('fileName', file.name);
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('destination', data.destination);
@@ -31,7 +33,8 @@ function CreatePost() {
 
     const config = {
       headers: {
-        'content-type': 'multipart/form-data'
+        'content-type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
       }
     }
     axios.post(url, formData, config)

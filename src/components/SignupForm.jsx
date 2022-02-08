@@ -4,12 +4,14 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 import initialState from './../initialState';
 import stateReducer from './../stateReducer';
 
 function SignupForm() {
   const [dispatch] = useReducer(stateReducer, initialState);
   const [file, setFile] = useState();
+  const [serverError, setServerError] = useState();
 
   const {
     register,
@@ -17,11 +19,10 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     const url = 'http://localhost:5500/auth/signup';
     const formData = new FormData();
     formData.append('avatar', file);
-    console.log(data);
     // formData.append('fileName', file.name);
     formData.append('username', data.username);
     formData.append('email', data.email);
@@ -32,31 +33,40 @@ function SignupForm() {
         'content-type': 'multipart/form-data',
       },
     };
-    axios.post(url, formData, config).then((response) => {
-      console.log(response);
-      dispatch(
-        {
+
+    axios.post(url, formData, config)
+      .then(function(response) {
+        console.log('.then');
+        dispatch({
           // store the access token that was returned with the response in global store
           type: 'setToken',
           data: response.accessToken,
-        },
-        {
+        });
+
+        dispatch({
           // store the user information that was returned with the response in global store
           type: 'setCurrentUser',
           data: response.user,
+        })
+      })
+      .catch(function (error) {
+        if (error.response) {
+          setServerError(error.response.data)
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
         }
-      ).catch((error) => {
-        // this is not working
-        // console.log(`Error: ${error}`);
-        console.log(error)
+        // console.log(error.config);
       });
-    });
   }
 
   return (
     <Container>
+      
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1> Sign Up </h1>
+        {serverError && <Alert variant='danger'> {serverError} </Alert>}
         <Form.Group className="mb-3">
           <Form.Label> Username </Form.Label>
           <Form.Control
@@ -106,7 +116,7 @@ function SignupForm() {
           />
         </Form.Group>
 
-        <Button type="submit"> Upload </Button>
+        <Button type="submit"> Sign Up </Button>
       </Form>
     </Container>
   );
