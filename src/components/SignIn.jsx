@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+// import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container';
@@ -10,7 +10,7 @@ export default function SignIn() {
   const { register, handleSubmit, formState: {errors}} = useForm()
 
   function onSubmit(data) {
-    const url = 'http://localhost:5500/auth/signin';
+    // const url = 'http://localhost:5500/auth/signin';
     console.log(data)
 
     // axios.post(url, data)

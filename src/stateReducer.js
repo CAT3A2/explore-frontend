@@ -1,5 +1,5 @@
 // we do not need to worry about the first parameter, react will get it
-export default function (currentState, action) {
+export default function stateReducer(currentState, action) {
 
     switch(action.type) {
         case 'setCurrentUser' : 
@@ -24,6 +24,7 @@ export default function (currentState, action) {
                 ...currentState,
                 posts: action.data
             }
+        default :
 
     }
 }

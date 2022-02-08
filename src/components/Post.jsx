@@ -18,7 +18,7 @@ export default function Post(  ) {
   const params = useParams();
   console.log(`Params: ${params.id}`)
 
-  const { store: { posts } } = useContext(ExploreContext)
+  const { store: { posts, currentUser } } = useContext(ExploreContext)
   console.log(`Posts: ${posts}`)
 
   const post = posts.find((post) => post.id === params.id);
@@ -39,7 +39,7 @@ export default function Post(  ) {
           <Col xs={8}>
             <Card.Title> {post.title} </Card.Title>
             <Card.Text>{post.description}</Card.Text>
-            <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
+            <Card.Text>{post.tags.map((tag) => <p key={tag.name}>{tag.name} </p>)}</Card.Text>
           </Col>
           <Col xs={2}>
             <Button variant="light" onClick={() => {}}>
@@ -52,13 +52,13 @@ export default function Post(  ) {
         <Card.Title> Comments </Card.Title>
         {post.comments.map((comment) => (
           // console.log(comment.comment)
-          <Card>
+          <Card key={comment.id}>
             <div> <Link to={`/profile/${comment.user.user_id}`} > {comment.user.username} </Link> -  {comment.comment} </div>
             {/* <div> Created {comment}</div> */}
             <br></br>
           </Card>
            ))} 
-        <CommentForm post_id={34}/>
+        <CommentForm post_id={post.id} user_id={currentUser.id}/>
       </ Container>
     </Card.Body>
   </Card>

@@ -1,11 +1,17 @@
 import * as React from 'react';
+import {useContext} from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+
+import ExploreContext from '../ExploreContext';
 
 export default function SearchAppBar() {
+
+  const { store: {currentUser}} = useContext(ExploreContext)
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container>
