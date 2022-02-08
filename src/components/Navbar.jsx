@@ -5,28 +5,37 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 export default function SearchAppBar() {
-
   return (
-<Navbar bg="light" expand="lg" fixed="top">
-  <Container>
-    <Navbar.Brand href="/">Explore</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="me-auto">
-        <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href="/about">About</Nav.Link>
-        <NavDropdown title="Username" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
-        </NavDropdown>
-      </Nav>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>
+    <Navbar bg="light" expand="lg" fixed="top">
+      <Container>
+        <Navbar.Brand href="/">Explore</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+            { currentUser ? (
+              <NavDropdown title="Username" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">
+                  My profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Create post
+                </NavDropdown.Item>
+                {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <div>
+                <Button>Sign In</Button>
+                <Button>Sign up</Button>
+              </div>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
