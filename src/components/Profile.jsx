@@ -31,24 +31,6 @@ export default function Profile() {
   return (
     <Container maxWidth="md">
       <h1> User Page </h1>
-      <Container maxWidth="sm"></Container>
-      {/* <Row>
-          <Col xs={2}>
-              <Avatar alt={post.user.username} src={post.user.avatar} />
-              <p>{post.user.username}</p>
-            </Col>
-            <Col xs={8}>
-              <Card.Title> {post.title} </Card.Title>
-              <Card.Text>{post.description}</Card.Text>
-              <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
-            </Col>
-            <Col xs={2}>
-              <Button variant="light" onClick={() => {}}>
-                <FavoriteSharpIcon sx={{ color: red[700] }} />
-                { !post.likes.length ? null : post.likes.length}
-              </Button>
-            </Col>
-        </Row> */}
 
       <Card style={{ maxWidth: '50rem' }}>
         <Link to={`/post/2`}>
@@ -59,7 +41,7 @@ export default function Profile() {
             <Row>
               <Col xs={2}>
                 <Avatar alt="{username}" src="" />
-                <p>Username</p>
+                <p>{user.username}</p>
               </Col>
               <Col xs={8}>
                 <Card.Title> This is Profile Card</Card.Title>

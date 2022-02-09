@@ -1,14 +1,15 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useReducer } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Container from '@mui/material/Container'
+import Container from '@mui/material/Container';
 import Alert from 'react-bootstrap/Alert';
+import { Link } from 'react-router-dom';
 // import initialState from './../initialState';
 // import stateReducer from './../stateReducer';
 import { useNavigate } from 'react-router-dom';
-import ExploreContext from '../ExploreContext'
+import ExploreContext from '../ExploreContext';
 
 function SignupForm() {
   const { dispatch } = useContext(ExploreContext);
@@ -21,8 +22,6 @@ function SignupForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-
 
   async function onSubmit(data) {
     const url = 'http://localhost:5500/auth/signup';
@@ -41,7 +40,7 @@ function SignupForm() {
     axios
       .post(url, formData, config)
       .then(function (response) {
-        console.log(response)
+        console.log(response.data.user);
         dispatch({
           // store the access token that was returned with the response in global store
           type: 'setAuthToken',
@@ -123,6 +122,10 @@ function SignupForm() {
         </Form.Group>
 
         <Button type="submit"> Sign Up </Button>
+        <h6>Already have an account with us?</h6>
+        <Link to="/signin">
+          <Button> Sign In</Button>
+        </Link>
       </Form>
     </Container>
   );

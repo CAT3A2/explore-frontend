@@ -9,7 +9,7 @@ import PostCard from './PostCard';
 export default function Posts( {posts, userObj} ) {
 
   return !posts?.length ? (
-    <CircularProgress />
+    null
     ) : (
       <Container className="justify-content-center" >
       <Stack gap={4}>
