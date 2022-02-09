@@ -11,11 +11,18 @@ import ExploreContext from '../ExploreContext';
 
 export default function SearchAppBar() {
 
-  const { store: {currentUser, authToken}} = useContext(ExploreContext)
+  const { store: {currentUser, authToken}, dispatch} = useContext(ExploreContext)
   console.log(currentUser)
 
+  const logOut = () => {
+    dispatch({
+      type: 'setToken',
+      data: ''
+    })
+  }
+
   return (
-    <Navbar bg="light" expand="lg" className='mb-5'>
+    <Navbar bg="light" expand="lg" className="mb-5">
       <Container>
         <Navbar.Brand href="/">Explore</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -23,17 +30,15 @@ export default function SearchAppBar() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
-            { authToken ? (
+            {authToken ? (
               <NavDropdown title="Username" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
-                  My profile
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Create post
-                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.1">My profile</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Create post</NavDropdown.Item>
                 {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
+                <NavDropdown.Item href="/" onClick={logOut}>
+                  Log Out
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <div>

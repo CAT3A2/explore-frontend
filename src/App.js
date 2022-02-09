@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       const res = await api.get('posts/all');
-      console.log(`Response: ${res.data}`);
       dispatch({
         type: 'setPosts',
         data: res.data,
@@ -35,8 +34,6 @@ function App() {
   }, []);
 
   const { posts } = store;
-  
-  console.log(store);
 
   return (
     <ExploreContext.Provider value={{ store, dispatch }}>
