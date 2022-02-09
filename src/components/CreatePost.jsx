@@ -18,7 +18,7 @@ function CreatePost() {
     formState: { errors },
   } = useForm();
 
-  const {store: {currentUser, token}} = useContext(ExploreContext)
+  const {store: {currentUser, authToken}} = useContext(ExploreContext)
 
   function onSubmit(data) {
     const url = `http://localhost:3000/profile/${currentUser.user_id}/posts`;
@@ -34,7 +34,7 @@ function CreatePost() {
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${authToken}`
       }
     }
     axios.post(url, formData, config)

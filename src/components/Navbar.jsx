@@ -11,8 +11,8 @@ import ExploreContext from '../ExploreContext';
 
 export default function SearchAppBar() {
 
-  const { store: {currentUser}} = useContext(ExploreContext)
-  console.log('/////////', currentUser)
+  const { store: {currentUser, authToken}} = useContext(ExploreContext)
+  console.log(currentUser)
 
   return (
     <Navbar bg="light" expand="lg" className='mb-5'>
@@ -23,7 +23,7 @@ export default function SearchAppBar() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
-            { currentUser ? (
+            { authToken ? (
               <NavDropdown title="Username" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">
                   My profile

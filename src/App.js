@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
 
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
@@ -25,15 +25,18 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       const res = await api.get('posts/all');
-      // console.log(`Response: ${res}`)
+      console.log(`Response: ${res.data}`);
       dispatch({
         type: 'setPosts',
         data: res.data,
       });
     }
     fetchData();
-
   }, []);
+
+  const { posts } = store;
+  
+  console.log(store);
 
   return (
     <ExploreContext.Provider value={{ store, dispatch }}>
@@ -41,7 +44,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Posts />} />
+            <Route path="/" element={<Posts posts={posts} />} />
             <Route path="/followers" element={<Followers />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
