@@ -1,22 +1,40 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useForm } from 'react-hook-form';
-// import axios from 'axios';
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container';
+import ExploreContext from '../ExploreContext';
 
 export default function SignIn() {
 
   const { register, handleSubmit, formState: {errors}} = useForm()
+  const { dispatch } = useContext(ExploreContext);
+  const {
+    store: { currentUser, authToken },
+  } = useContext(ExploreContext);
 
   function onSubmit(data) {
-    // const url = 'http://localhost:5500/auth/signin';
+    const url = 'http://localhost:5500/auth/signin';
     console.log(data)
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      },
+    };
+    axios.post(url, data, config).then((response) => {
+      dispatch({
+        // store the access token that was returned with the response in global store
+        type: 'setAuthToken',
+        data: response.data.accessToken,
+      });
 
-    // axios.post(url, data)
-    //   .then((response) => {
-    //     console.log(data)
-    //   })
+      dispatch({
+        // store the user information that was returned with the response in global store
+        type: 'setCurrentUser',
+        data: response.data.user,
+      });
+    });
   }
 
 

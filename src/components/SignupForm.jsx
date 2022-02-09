@@ -5,8 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container'
 import Alert from 'react-bootstrap/Alert';
-import initialState from './../initialState';
-import stateReducer from './../stateReducer';
+// import initialState from './../initialState';
+// import stateReducer from './../stateReducer';
 import { useNavigate } from 'react-router-dom';
 import ExploreContext from '../ExploreContext'
 
@@ -41,7 +41,6 @@ function SignupForm() {
     axios
       .post(url, formData, config)
       .then(function (response) {
-        console.log('.then');
         console.log(response)
         dispatch({
           // store the access token that was returned with the response in global store
