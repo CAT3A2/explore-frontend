@@ -1,16 +1,16 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { CircularProgress } from '@mui/material';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
-import ExploreContext from "../ExploreContext";
+
 
 import PostCard from './PostCard';
 
-export default function Posts( ) {
-  const { store: { posts } } = useContext(ExploreContext)
+export default function Posts( {posts} ) {
+  console.log(posts)
 
-  return !posts.length ? (
+  return !posts?.length ? (
     <CircularProgress />
   ) : (
     <Container className="justify-content-center" >

@@ -8,10 +8,10 @@ export default function stateReducer(currentState, action) {
                 currentUser: action.data
             }
 
-        case 'setToken' :
+        case 'setAuthToken' :
             return {
                 ...currentState,
-                token: action.data
+                authToken: action.data
             }
 
         case 'setUsers' : 

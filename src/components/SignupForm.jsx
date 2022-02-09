@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
@@ -8,9 +8,10 @@ import Alert from 'react-bootstrap/Alert';
 import initialState from './../initialState';
 import stateReducer from './../stateReducer';
 import { useNavigate } from 'react-router-dom';
+import ExploreContext from '../ExploreContext'
 
 function SignupForm() {
-  const [store, dispatch] = useReducer(stateReducer, initialState);
+  const { dispatch } = useContext(ExploreContext);
   const [file, setFile] = useState();
   const [serverError, setServerError] = useState();
   let navigate = useNavigate();
@@ -21,11 +22,12 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
+
+
   async function onSubmit(data) {
     const url = 'http://localhost:5500/auth/signup';
     const formData = new FormData();
     formData.append('avatar', file);
-    // formData.append('fileName', file.name);
     formData.append('username', data.username);
     formData.append('email', data.email);
     formData.append('password', data.password);
@@ -40,16 +42,17 @@ function SignupForm() {
       .post(url, formData, config)
       .then(function (response) {
         console.log('.then');
+        console.log(response)
         dispatch({
           // store the access token that was returned with the response in global store
-          type: 'setToken',
-          data: response.accessToken,
+          type: 'setAuthToken',
+          data: response.data.accessToken,
         });
 
         dispatch({
           // store the user information that was returned with the response in global store
           type: 'setCurrentUser',
-          data: response.user,
+          data: response.data.user,
         });
 
         navigate('/');
