@@ -3,15 +3,17 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import Container from '@mui/material/Container'
 import Alert from 'react-bootstrap/Alert';
 import initialState from './../initialState';
 import stateReducer from './../stateReducer';
+import { useNavigate } from 'react-router-dom';
 
 function SignupForm() {
-  const [dispatch] = useReducer(stateReducer, initialState);
+  const [store, dispatch] = useReducer(stateReducer, initialState);
   const [file, setFile] = useState();
   const [serverError, setServerError] = useState();
+  let navigate = useNavigate();
 
   const {
     register,
@@ -34,8 +36,9 @@ function SignupForm() {
       },
     };
 
-    axios.post(url, formData, config)
-      .then(function(response) {
+    axios
+      .post(url, formData, config)
+      .then(function (response) {
         console.log('.then');
         dispatch({
           // store the access token that was returned with the response in global store
@@ -47,11 +50,13 @@ function SignupForm() {
           // store the user information that was returned with the response in global store
           type: 'setCurrentUser',
           data: response.user,
-        })
+        });
+
+        navigate('/');
       })
       .catch(function (error) {
         if (error.response) {
-          setServerError(error.response.data)
+          setServerError(error.response.data);
         } else if (error.request) {
           console.log(error.request);
         } else {
@@ -62,11 +67,10 @@ function SignupForm() {
   }
 
   return (
-    <Container>
-      
+    <Container maxWidth="sm">
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1> Sign Up </h1>
-        {serverError && <Alert variant='danger'> {serverError} </Alert>}
+        {serverError && <Alert variant="danger"> {serverError} </Alert>}
         <Form.Group className="mb-3">
           <Form.Label> Username </Form.Label>
           <Form.Control

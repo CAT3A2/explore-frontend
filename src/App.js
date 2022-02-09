@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await api.get('posts');
+      const res = await api.get('posts/all');
       // console.log(`Response: ${res}`)
       dispatch({
         type: 'setPosts',

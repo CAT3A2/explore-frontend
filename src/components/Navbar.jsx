@@ -12,9 +12,10 @@ import ExploreContext from '../ExploreContext';
 export default function SearchAppBar() {
 
   const { store: {currentUser}} = useContext(ExploreContext)
-  
+  console.log('/////////', currentUser)
+
   return (
-    <Navbar bg="light" expand="lg" fixed="top">
+    <Navbar bg="light" expand="lg" className='mb-5'>
       <Container>
         <Navbar.Brand href="/">Explore</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -36,8 +37,12 @@ export default function SearchAppBar() {
               </NavDropdown>
             ) : (
               <div>
-                <Button>Sign In</Button>
-                <Button>Sign up</Button>
+                <Button>
+                  <Nav.Link href="/signin">Sign In</Nav.Link>
+                </Button>
+                <Button>
+                  <Nav.Link href="/signup">Sign Up</Nav.Link>
+                </Button>
               </div>
             )}
           </Nav>
