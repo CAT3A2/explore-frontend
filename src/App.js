@@ -35,6 +35,7 @@ function App() {
   }, []);
 
   const { posts } = store;
+  
   console.log(store);
 
   return (
