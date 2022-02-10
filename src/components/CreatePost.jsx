@@ -4,13 +4,17 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import {useNavigate} from 'react-router-dom'
+import { useCookies } from 'react-cookie';
 
 import ExploreContext from "../ExploreContext";
 
 
 function CreatePost() {
 
-  const [image, setImage] = useState();
+  const [cookies, setCookie] = useCookies(['tokenCookie']);
+  const [file, setFile] = useState();
+  const navigate = useNavigate()
 
   const {
     register,
@@ -20,27 +24,30 @@ function CreatePost() {
 
   const {store: {currentUser, authToken}} = useContext(ExploreContext)
 
+
   function onSubmit(data) {
-    const url = `http://localhost:3000/profile/${currentUser.user_id}/posts`;
+    const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
     const formData = new FormData();
     // split tags from string into an array of strings
     const tagArray = data.tags.split(/[\s,]+/)
-    formData.append('image', image);
+    formData.append('image_url', file);
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('destination', data.destination);
     formData.append('tags', tagArray)
 
+
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
-        'Authorization': `Bearer ${authToken}`
+        'Authorization': `Bearer ${cookies.tokenCookie}}`
       }
     }
     axios.post(url, formData, config)
       .then((response) => {
-        console.log(response.data)
+        navigate('/')
       })
+      
   }
 
   return (
@@ -103,7 +110,7 @@ function CreatePost() {
 
         <Form.Group>
           <Form.Label > Image </Form.Label>
-          <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} />
+          <Form.Control type="file" onChange={(e) => setFile(e.target.files[0])} />
         </Form.Group>
 
         <Button type="submit"> Upload </Button>

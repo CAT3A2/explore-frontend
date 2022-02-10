@@ -6,15 +6,17 @@ import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
-// import initialState from './../initialState';
-// import stateReducer from './../stateReducer';
 import { useNavigate } from 'react-router-dom';
 import ExploreContext from '../ExploreContext';
+import { useCookies } from "react-cookie";
+
 
 function SignupForm() {
   const { dispatch } = useContext(ExploreContext);
   const [file, setFile] = useState();
   const [serverError, setServerError] = useState();
+  const [cookies, setCookie] = useCookies(['tokenCookie']);
+
   let navigate = useNavigate();
 
   const {
@@ -40,20 +42,22 @@ function SignupForm() {
     axios
       .post(url, formData, config)
       .then(function (response) {
-        console.log(response.data.user);
-        dispatch({
-          // store the access token that was returned with the response in global store
-          type: 'setAuthToken',
-          data: response.data.accessToken,
-        });
-
+ 
         dispatch({
           // store the user information that was returned with the response in global store
           type: 'setCurrentUser',
           data: response.data.user,
         });
+        // dispatch({
+        //   // store the access token that was returned with the response in global store
+        //   type: 'setAuthToken',
+        //   data: response.data.accessToken,
+        // });
+        setCookie('tokenCookie', response.data.accessToken)
+
 
         navigate('/');
+        
       })
       .catch(function (error) {
         if (error.response) {
@@ -63,7 +67,7 @@ function SignupForm() {
         } else {
           console.log('Error', error.message);
         }
-        // console.log(error.config);
+
       });
   }
 

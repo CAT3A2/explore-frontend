@@ -1,6 +1,6 @@
 const initialState = {
     currentUser: null,
-    authToken: null,
+    // authToken: null,
     posts: [],
     users: [],
     user: {

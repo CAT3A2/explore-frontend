@@ -16,32 +16,31 @@ import api from './../api'
 
 export default function Post() {
   const params = useParams();
-  // console.log(`Params: ${params.post_id}`);
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState();
   const [comments, setComments] = useState([]);
-  const { store: {currentUser, authToken}} = useContext(ExploreContext)
+  const { store: {currentUser}} = useContext(ExploreContext)
 
   useEffect(() => {
     async function fetchData() {
       const res = await api.get(`posts/${params.post_id}`);
-      console.log(res.data)
 
       setPost(res.data);
       setComments(res.data.comments);
+      console.log(post)
     }
     fetchData();
-    console.log(comments)
   }, []);
 
   return post ? (
     <Card style={{ maxWidth: '50rem' }}>
       {/* <Link to={`/posts/${post.post_id}`}> */}
-        <Card.Img variant="top" src={post.image} />
+        <Card.Img variant="top" src={post.image_url} />
       {/* </Link> */}
       <Card.Body>
         <Container>
           <Row>
             <Col xs={2}>
+             { console.log(post)}
               <Avatar alt={post.user.username} src={post.user.avatar} />
               <p>{post.user.username}</p>
             </Col>
@@ -64,7 +63,6 @@ export default function Post() {
           <hr></hr>
           <Card.Title> Comments </Card.Title>
           {comments.map((comment) => (
-            // console.log(comment.comment)
             <Card key={comment.id}>
               <div>
                 {' '}
@@ -78,7 +76,7 @@ export default function Post() {
               <br></br>
             </Card>
           ))}
-          <CommentForm post_id={post.id} user_id={currentUser.id} />
+          { currentUser && <CommentForm post_id={post.id} user_id={currentUser.id} />}
         </Container>
       </Card.Body>
     </Card>

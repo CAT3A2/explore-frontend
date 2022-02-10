@@ -7,8 +7,12 @@ import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container';
 import ExploreContext from '../ExploreContext';
 import Alert from 'react-bootstrap/Alert';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 
 export default function SignIn() {
+  let navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,30 +20,32 @@ export default function SignIn() {
   } = useForm();
   const { dispatch } = useContext(ExploreContext);
   const {
-    store: { authToken },
+    store: { currentUser },
   } = useContext(ExploreContext);
   const [serverError, setServerError] = useState();
 
+  const [cookies, setCookie] = useCookies(['tokenCookie'])
+
+
   function onSubmit(data) {
-    const url = 'http://localhost:5500/auth/signin';
-    console.log(data);
-    const config = {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    };
-    axios.post(url, data, config).then((response) => {
-      dispatch({
-        // store the access token that was returned with the response in global store
-        type: 'setAuthToken',
-        data: response.data.accessToken,
-      });
+    const url = 'http://localhost:5500/auth/login';
+
+    axios.post(url, data).then((response) => {
 
       dispatch({
         // store the user information that was returned with the response in global store
         type: 'setCurrentUser',
         data: response.data.user,
       });
+      // dispatch({
+      //   // store the access token that was returned with the response in global store
+      //   type: 'setAuthToken',
+      //   data: response.data.accessToken,
+      // });
+      setCookie('tokenCookie', response.data.accessToken)
+      
+
+      navigate('/');
     })
     .catch(function (error) {
       if (error.response) {

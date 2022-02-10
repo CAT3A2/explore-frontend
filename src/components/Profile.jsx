@@ -32,20 +32,17 @@ export default function Profile() {
     <Container maxWidth="md">
       <h1> User Page </h1>
 
-      <Card style={{ maxWidth: '50rem' }}>
-        <Link to={`/post/2`}>
-          <Card.Img variant="top" src="" />
-        </Link>
+      <Card style={{ maxWidth: '50rem' }}> 
         <Card.Body>
           <Container>
             <Row>
               <Col xs={2}>
-                <Avatar alt="{username}" src="" />
-                <p>{user.username}</p>
+                <Avatar alt="{username}" src={user.avatar} sx={{ width: 56, height: 56 }}/>
+                {/* <p>{user.username}</p> */}
               </Col>
               <Col xs={8}>
-                <Card.Title> This is Profile Card</Card.Title>
-                <Card.Text>This is description</Card.Text>
+                <Card.Title> {user.username} </Card.Title>
+                <Button>Follow</Button>
               </Col>
               <Col xs={2}></Col>
             </Row>

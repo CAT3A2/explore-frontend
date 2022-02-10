@@ -15,12 +15,15 @@ import CreatePost from './components/CreatePost';
 import stateReducer from './stateReducer';
 import ExploreContext from './ExploreContext';
 import initialState from './initialState';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 import './style/app.css';
 import api from './api';
 
 function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
+  const [cookies, setCookie] = useCookies(['tokenCookie']);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,6 +35,37 @@ function App() {
     }
     fetchData();
   }, []);
+
+
+  useEffect(() => {
+    if (cookies.tokenCookie !== undefined && cookies.tokenCookie !== '') {
+      const url = 'http://localhost:5500/auth/me';
+      const config = {
+        headers: {
+          Authorization: `Bearer ${cookies.tokenCookie}`,
+        },
+      };
+
+      axios.get(url, config)
+        .then(function (response) {
+          console.log(response)
+          dispatch({
+            // store the user information that was returned with the response in global store
+            type: 'setCurrentUser',
+            data: response.data,
+          });
+          console.log(response.data)
+
+          // dispatch({
+          //   // store the access token that was returned with the response in global store
+          //   type: 'setAuthToken',
+          //   data: `${cookies.tokenCookie}`,
+          // });
+      })
+
+    }
+  }, []);
+
 
   const { posts } = store;
 

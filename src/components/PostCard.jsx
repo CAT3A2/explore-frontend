@@ -17,12 +17,13 @@ export default function Post({ post, userObj }) {
   } = useContext(ExploreContext);
 
   const [allLikes, setAllLikes] = useState([]);
-  let { post_id, image, description, tags, title, likes, user } = post;
+  let { post_id, image_url, description, tags, title, likes, user } = post;
   let username, avatar, user_id;
-
+  
   if (user) {
     ({ username, avatar, user_id } = user);
   } else {
+    console.log(userObj)
     ({ username, avatar, user_id } = userObj);
   }
 
@@ -40,9 +41,9 @@ export default function Post({ post, userObj }) {
         user_id: currentUser.user_id,
         post_id,
       })
-      .then((likes) => {
-        setAllLikes(likes);
-        console.log(allLikes);
+      .then((response) => {
+        setAllLikes(response.data);
+        console.log(response)
       })
       .catch((err) => console.log(err));
   };
@@ -50,7 +51,7 @@ export default function Post({ post, userObj }) {
   return (
     <Card style={{ maxWidth: '50rem' }}>
       <Link to={`/post/${post_id}`}>
-        <Card.Img variant="top" src={image} />
+        <Card.Img variant="top" src={image_url} />
       </Link>
       <Card.Body>
         <Container>
