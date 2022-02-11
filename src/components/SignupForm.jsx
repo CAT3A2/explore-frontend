@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import ExploreContext from '../ExploreContext';
 import { useCookies } from "react-cookie";
+import api from './../api'
 
 
 function SignupForm() {
@@ -39,7 +40,7 @@ function SignupForm() {
       },
     };
 
-    axios
+    api
       .post(url, formData, config)
       .then(function (response) {
  

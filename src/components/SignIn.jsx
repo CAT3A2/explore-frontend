@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {Link} from 'react-router-dom'
-import axios from 'axios';
+// import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container';
@@ -9,6 +9,7 @@ import ExploreContext from '../ExploreContext';
 import Alert from 'react-bootstrap/Alert';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
+import api from './../api'
 
 export default function SignIn() {
 
@@ -24,9 +25,9 @@ export default function SignIn() {
 
 
   function onSubmit(data) {
-    const url = 'http://localhost:5500/auth/login';
+    // const url = 'http://localhost:5500/auth/login';
 
-    axios.post(url, data).then((response) => {
+    api.post('auth/login', data).then((response) => {
 
       dispatch({
         // store the user information that was returned with the response in global store

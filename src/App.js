@@ -17,7 +17,7 @@ import SignIn from './components/SignIn';
 import About from './components/About';
 import Post from './components/Post';
 import CreatePost from './components/CreatePost';
-import UpdatePost from './components/UpdatePost'
+import UpdatePost from './components/UpdatePost';
 
 import './style/app.css';
 import api from './api';
@@ -38,23 +38,26 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (cookies.tokenCookie !== undefined && cookies.tokenCookie !== '') {
-      const url = 'http://localhost:5500/auth/me';
-      const config = {
-        headers: {
-          Authorization: `Bearer ${cookies.tokenCookie}`,
-        },
-      };
+    async function fetchUser() {
+      if (cookies.tokenCookie !== undefined && cookies.tokenCookie !== '') {
+        // const url = 'http://localhost:5500/auth/me';
+        const config = {
+          headers: {
+            Authorization: `Bearer ${cookies.tokenCookie}`,
+          },
+        };
 
-      axios.get(url, config).then(function (response) {
-        console.log(response);
-        dispatch({
-          // store the user information that was returned with the response in global store
-          type: 'setCurrentUser',
-          data: response.data,
+        api.get('auth/me', config).then(function (response) {
+          console.log(response);
+          dispatch({
+            // store the user information that was returned with the response in global store
+            type: 'setCurrentUser',
+            data: response.data,
+          });
         });
-      });
+      }
     }
+    fetchUser();
   }, []);
 
   const { posts } = store;

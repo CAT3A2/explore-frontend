@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 import ExploreContext from '../ExploreContext';
+import api from './../api'
 
 function CreatePost() {
   const [cookies] = useCookies(['tokenCookie']);
@@ -25,7 +26,7 @@ function CreatePost() {
   } = useContext(ExploreContext);
 
   function onSubmit(data) {
-    const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
+    // const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
     const formData = new FormData();
     // split tags from string into an array of strings
     const tagArray = data.tags.split(/[\s,]+/);
@@ -43,7 +44,7 @@ function CreatePost() {
         'Authorization': `Bearer ${cookies.tokenCookie}`,
       },
     };
-    axios.post(url, formData, config).then((response) => {
+    api.post(`profile/${currentUser.user_id}/posts`, formData, config).then((response) => {
       navigate('/');
     });
   }

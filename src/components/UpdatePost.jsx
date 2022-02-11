@@ -30,11 +30,18 @@ function UpdatePost() {
     fetchData();
   }, []);
 
+  const preloadedValues = {
+      title: `${post.title}`,
+      description: `${post.description}`,
+      destination: `${post.destination}`,
+      tags: `${post.tags}`
+  }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({defaultValues: post});
+  } = useForm({defaultValues: preloadedValues});
 
   function onSubmit(data) {
     const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
@@ -56,8 +63,9 @@ function UpdatePost() {
       },
     };
     axios.post(url, formData, config).then((response) => {
-      navigate('/');
+      console.log(response)
     });
+    navigate(`/post/${params.post_id}`);
   }
 
   return (

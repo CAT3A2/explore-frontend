@@ -17,7 +17,7 @@ import axios from 'axios';
 import api from './../api';
 
 export default function Post() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const params = useParams();
   const [post, setPost] = useState();
   const [cookies] = useCookies(['tokenCookie']);
@@ -43,14 +43,11 @@ export default function Post() {
       },
     };
 
-    axios
-      .delete(
-        `http://localhost:5500/profile/${post.user_id}/posts/${post.post_id}`,
-        config
-      )
+    api
+      .delete(`profile/${post.user_id}/posts/${post.post_id}`, config)
       .then((response) => {
         console.log(response);
-        navigate("/")
+        navigate('/');
       })
       .catch((err) => console.log(err));
   };
@@ -69,7 +66,7 @@ export default function Post() {
               <Card.Title> {post.title} </Card.Title>
               <Card.Text>{post.description}</Card.Text>
               <Card.Text>
-              <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
+                <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
               </Card.Text>
             </Col>
             <Col xs={2}>
@@ -80,12 +77,9 @@ export default function Post() {
             </Col>
             {currentUser?.user_id === post.user.user_id && (
               <Col>
-                <Button 
-                  onClick={deletePost}
-                  >Delete Post
-                </Button>
+                <Button onClick={deletePost}>Delete Post</Button>
                 <Button>
-                <Link to={`/post/${post.post_id}/update`}>Edit</Link>
+                  <Link to={`/post/${post.post_id}/update`}>Edit</Link>
                 </Button>
               </Col>
             )}

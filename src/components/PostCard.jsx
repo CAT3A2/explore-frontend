@@ -9,7 +9,8 @@ import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import ExploreContext from '../ExploreContext';
-import axios from 'axios';
+// import axios from 'axios';
+import api from './../api'
 
 export default function Post({ post, userObj }) {
   const {
@@ -35,8 +36,8 @@ export default function Post({ post, userObj }) {
   }, []);
 
   const addLike = () => {
-    axios
-      .post(`http://localhost:5500/posts/${post_id}/like`, {
+    api
+      .post(`posts/${post_id}/like`, {
         user_id: currentUser.user_id,
         post_id,
       })

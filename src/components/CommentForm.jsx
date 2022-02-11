@@ -6,6 +6,8 @@ import axios from 'axios';
 import ExploreContext from '../ExploreContext';
 import { useCookies } from 'react-cookie';
 
+import api from './../api'
+
 export default function CommentForm({ post_id, user_id }) {
   const [cookies] = useCookies(['tokenCookie']);
   const {
@@ -29,7 +31,7 @@ export default function CommentForm({ post_id, user_id }) {
       },
     };
 
-    axios.post(url, data, config).then((response) => {
+    api.post(`posts/${post_id}/comment`, data, config).then((response) => {
       console.log('afrter');
     });
   }
