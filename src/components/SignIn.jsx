@@ -11,19 +11,15 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
 
 export default function SignIn() {
-  let navigate = useNavigate();
 
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const { dispatch } = useContext(ExploreContext);
-  const {
-    store: { currentUser },
-  } = useContext(ExploreContext);
   const [serverError, setServerError] = useState();
-
   const [cookies, setCookie] = useCookies(['tokenCookie'])
 
 
@@ -37,12 +33,9 @@ export default function SignIn() {
         type: 'setCurrentUser',
         data: response.data.user,
       });
-      // dispatch({
-      //   // store the access token that was returned with the response in global store
-      //   type: 'setAuthToken',
-      //   data: response.data.accessToken,
-      // });
+      // store accessToken extracted from response in a cookie
       setCookie('tokenCookie', response.data.accessToken)
+      console.log(cookies.tokenCookie)
       
 
       navigate('/');
@@ -55,7 +48,6 @@ export default function SignIn() {
       } else {
         console.log('Error', error.message);
       }
-      // console.log(error.config);
     });
   }
 

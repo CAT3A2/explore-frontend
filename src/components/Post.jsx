@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ExploreContext from '../ExploreContext';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -11,14 +11,20 @@ import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
-import api from './../api'
+import api from './../api';
 
 export default function Post() {
+  const navigate = useNavigate()
   const params = useParams();
   const [post, setPost] = useState();
+  const [cookies] = useCookies(['tokenCookie']);
   const [comments, setComments] = useState([]);
-  const { store: {currentUser}} = useContext(ExploreContext)
+  const {
+    store: { currentUser },
+  } = useContext(ExploreContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -26,21 +32,37 @@ export default function Post() {
 
       setPost(res.data);
       setComments(res.data.comments);
-      console.log(post)
     }
     fetchData();
   }, []);
 
+  const deletePost = () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookies.tokenCookie}`,
+      },
+    };
+
+    axios
+      .delete(
+        `http://localhost:5500/profile/${post.user_id}/posts/${post.post_id}`,
+        config
+      )
+      .then((response) => {
+        console.log(response);
+        navigate("/")
+      })
+      .catch((err) => console.log(err));
+  };
+
   return post ? (
     <Card style={{ maxWidth: '50rem' }}>
-      {/* <Link to={`/posts/${post.post_id}`}> */}
-        <Card.Img variant="top" src={post.image_url} />
-      {/* </Link> */}
+      <Card.Img variant="top" src={post.image_url} />
       <Card.Body>
         <Container>
           <Row>
             <Col xs={2}>
-             { console.log(post)}
+              {console.log(post)}
               <Avatar alt={post.user.username} src={post.user.avatar} />
               <p>{post.user.username}</p>
             </Col>
@@ -48,9 +70,7 @@ export default function Post() {
               <Card.Title> {post.title} </Card.Title>
               <Card.Text>{post.description}</Card.Text>
               <Card.Text>
-                {post.tags.map((tag) => (
-                  <p key={tag.name}>{tag.name} </p>
-                ))}
+              <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
               </Card.Text>
             </Col>
             <Col xs={2}>
@@ -59,6 +79,13 @@ export default function Post() {
                 {!post.likes.length ? null : post.likes.length}
               </Button>
             </Col>
+            {currentUser.user_id === post.user.user_id && (
+              <Col>
+                <Button 
+                  onClick={deletePost}
+                >Delete Post</Button>
+              </Col>
+            )}
           </Row>
           <hr></hr>
           <Card.Title> Comments </Card.Title>
@@ -76,7 +103,9 @@ export default function Post() {
               <br></br>
             </Card>
           ))}
-          { currentUser && <CommentForm post_id={post.id} user_id={currentUser.id} />}
+          {currentUser && (
+            <CommentForm post_id={post.id} user_id={currentUser.id} />
+          )}
         </Container>
       </Card.Body>
     </Card>

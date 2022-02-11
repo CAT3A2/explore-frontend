@@ -29,7 +29,6 @@ export default function Post({ post, userObj }) {
 
   useEffect(() => {
     async function fetchData() {
-      // const res = await api.get(`posts/${post_id}/like`);
       setAllLikes(likes);
     }
     fetchData();

@@ -19,10 +19,6 @@ export default function SearchAppBar() {
   const [cookies, setCookie] = useCookies(['tokenCookie']);
   console.log(cookies.tokenCookie)
   const logOut = () => {
-    // dispatch({
-    //   type: 'setAuthToken',
-    //   data: null,
-    // });
     dispatch({
       type: 'setCurentUser',
       data: null,
@@ -33,7 +29,6 @@ export default function SearchAppBar() {
   return (
     <Navbar bg="light" expand="lg" className="mb-5">
       <Container>
-        {/* <Navbar.Brand href="/">Explore</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

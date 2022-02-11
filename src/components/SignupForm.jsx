@@ -1,4 +1,4 @@
-import { useState, useContext, useReducer } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
@@ -15,7 +15,7 @@ function SignupForm() {
   const { dispatch } = useContext(ExploreContext);
   const [file, setFile] = useState();
   const [serverError, setServerError] = useState();
-  const [cookies, setCookie] = useCookies(['tokenCookie']);
+  const [setCookie] = useCookies(['tokenCookie']);
 
   let navigate = useNavigate();
 
@@ -48,14 +48,10 @@ function SignupForm() {
           type: 'setCurrentUser',
           data: response.data.user,
         });
-        // dispatch({
-        //   // store the access token that was returned with the response in global store
-        //   type: 'setAuthToken',
-        //   data: response.data.accessToken,
-        // });
+        // save accessToken from response to a cookie
         setCookie('tokenCookie', response.data.accessToken)
 
-
+        // navigate to home page after successful signup
         navigate('/');
         
       })

@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useReducer, useEffect, useContext } from 'react';
-
+import { useReducer, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
 import Followers from './components/Followers';
@@ -23,7 +22,7 @@ import api from './api';
 
 function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
-  const [cookies, setCookie] = useCookies(['tokenCookie']);
+  const [cookies] = useCookies(['tokenCookie']);
 
   useEffect(() => {
     async function fetchData() {
@@ -54,13 +53,6 @@ function App() {
             type: 'setCurrentUser',
             data: response.data,
           });
-          console.log(response.data)
-
-          // dispatch({
-          //   // store the access token that was returned with the response in global store
-          //   type: 'setAuthToken',
-          //   data: `${cookies.tokenCookie}`,
-          // });
       })
 
     }
