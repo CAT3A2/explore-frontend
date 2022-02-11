@@ -62,7 +62,6 @@ export default function Post() {
         <Container>
           <Row>
             <Col xs={2}>
-              {console.log(post)}
               <Avatar alt={post.user.username} src={post.user.avatar} />
               <p>{post.user.username}</p>
             </Col>
@@ -79,11 +78,15 @@ export default function Post() {
                 {!post.likes.length ? null : post.likes.length}
               </Button>
             </Col>
-            {currentUser.user_id === post.user.user_id && (
+            {currentUser?.user_id === post.user.user_id && (
               <Col>
                 <Button 
                   onClick={deletePost}
-                >Delete Post</Button>
+                  >Delete Post
+                </Button>
+                <Button>
+                <Link to={`/post/${post.post_id}/update`}>Edit</Link>
+                </Button>
               </Col>
             )}
           </Row>

@@ -2,6 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useReducer, useEffect } from 'react';
+import stateReducer from './stateReducer';
+import ExploreContext from './ExploreContext';
+import initialState from './initialState';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
 import Followers from './components/Followers';
@@ -11,11 +17,7 @@ import SignIn from './components/SignIn';
 import About from './components/About';
 import Post from './components/Post';
 import CreatePost from './components/CreatePost';
-import stateReducer from './stateReducer';
-import ExploreContext from './ExploreContext';
-import initialState from './initialState';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import UpdatePost from './components/UpdatePost'
 
 import './style/app.css';
 import api from './api';
@@ -35,7 +37,6 @@ function App() {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     if (cookies.tokenCookie !== undefined && cookies.tokenCookie !== '') {
       const url = 'http://localhost:5500/auth/me';
@@ -45,19 +46,16 @@ function App() {
         },
       };
 
-      axios.get(url, config)
-        .then(function (response) {
-          console.log(response)
-          dispatch({
-            // store the user information that was returned with the response in global store
-            type: 'setCurrentUser',
-            data: response.data,
-          });
-      })
-
+      axios.get(url, config).then(function (response) {
+        console.log(response);
+        dispatch({
+          // store the user information that was returned with the response in global store
+          type: 'setCurrentUser',
+          data: response.data,
+        });
+      });
     }
   }, []);
-
 
   const { posts } = store;
 
@@ -76,6 +74,7 @@ function App() {
             <Route path="/post/:post_id" element={<Post />} />
             <Route path="/liked" element={<Posts />} />
             <Route path="post/new" element={<CreatePost />} />
+            <Route path="post/:post_id/update" element={<UpdatePost />} />
 
             <Route path="*" element={<h4>Page Not Found</h4>} />
           </Routes>
