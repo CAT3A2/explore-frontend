@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import { useCookies } from 'react-cookie';
+import api from '../api.js';
 
 import ExploreContext from '../ExploreContext';
 
@@ -17,13 +18,26 @@ export default function SearchAppBar() {
     dispatch,
   } = useContext(ExploreContext);
   const [cookies, setCookie] = useCookies(['tokenCookie']);
-  console.log(cookies.tokenCookie)
+  const [searchedContent, setSearchedContent] = useState('');
+  console.log(cookies.tokenCookie);
   const logOut = () => {
     dispatch({
       type: 'setCurentUser',
       data: null,
     });
     setCookie('tokenCookie', '');
+  };
+
+  const changeHandler = (e) => {
+    setSearchedContent(e.target.value);
+  };
+  const searchPosts = async () => {
+    const res = await api.get(`http://localhost:5500/posts/?search=${searchedContent}`);
+    console.log(res);
+    dispatch({
+      type: 'setSearchedPost',
+      data: res.data,
+    });
   };
 
   return (
@@ -35,8 +49,13 @@ export default function SearchAppBar() {
             <Link to="/">Home</Link>
 
             <Link to="/about">About</Link>
-
-            {currentUser? (
+            <form onSubmit={searchPosts}>
+              <input type="text" name="search" onChange={changeHandler} />
+              <Link to="/search" onClick={searchPosts}>
+                Search
+              </Link>
+            </form>
+            {currentUser ? (
               <NavDropdown title={currentUser.username} id="basic-nav-dropdown">
                 <NavDropdown.Item>
                   <Link to={`profile/${currentUser.user_id}`}>My profile</Link>

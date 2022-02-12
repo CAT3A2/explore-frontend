@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import ExploreContext from '../ExploreContext';
 import { useCookies } from 'react-cookie';
+
+import ExploreContext from '../ExploreContext';
+
 
 import api from './../api'
 
 export default function CommentForm({ post_id, user_id }) {
-  const [cookies] = useCookies(['tokenCookie']);
+  const [cookies, setCookie] = useCookies(['tokenCookie']);
   const {
     register,
     handleSubmit,

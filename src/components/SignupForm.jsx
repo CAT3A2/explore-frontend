@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from '@mui/material/Container';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import ExploreContext from '../ExploreContext';
 import { useCookies } from "react-cookie";
+
 import api from './../api'
+import ExploreContext from '../ExploreContext';
 
 
 function SignupForm() {
@@ -59,11 +59,12 @@ function SignupForm() {
       .catch(function (error) {
         if (error.response) {
           setServerError(error.response.data);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
         }
+        //  else if (error.request) {
+        //   console.log(error.request);
+        // } else {
+        //   // console.log('Error', error.message);
+        // }
 
       });
   }

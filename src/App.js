@@ -2,11 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useReducer, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import stateReducer from './stateReducer';
 import ExploreContext from './ExploreContext';
 import initialState from './initialState';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
 
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
@@ -24,7 +23,7 @@ import api from './api';
 
 function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
-  const [cookies] = useCookies(['tokenCookie']);
+  const [cookies, setCookies] = useCookies(['tokenCookie']);
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +36,8 @@ function App() {
     fetchData();
   }, []);
 
+  // when global state is cleared out and token in cookies is still present,
+  // get the logged in user from server and save them in currentUser
   useEffect(() => {
     async function fetchUser() {
       if (cookies.tokenCookie !== undefined && cookies.tokenCookie !== '') {
@@ -48,7 +49,7 @@ function App() {
         };
 
         api.get('auth/me', config).then(function (response) {
-          console.log(response);
+          // console.log(response);
           dispatch({
             // store the user information that was returned with the response in global store
             type: 'setCurrentUser',
@@ -60,7 +61,7 @@ function App() {
     fetchUser();
   }, []);
 
-  const { posts } = store;
+  const { posts, searchedPosts } = store;
 
   return (
     <ExploreContext.Provider value={{ store, dispatch }}>
@@ -69,6 +70,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Posts posts={posts} />} />
+            <Route path="/search" element={<Posts posts={searchedPosts} />} />
             <Route path="/followers" element={<Followers />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />

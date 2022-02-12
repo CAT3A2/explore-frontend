@@ -1,74 +1,73 @@
 import { useState, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import api from './../api'
 
+import api from './../api';
 import ExploreContext from '../ExploreContext';
 
 function UpdatePost() {
-  const [cookies] = useCookies(['tokenCookie']);
-  const [file, setFile] = useState();
+  const [cookies, setCookies] = useCookies(['tokenCookie']);
+  //   const [file, setFile] = useState();
   const [post, setPost] = useState();
+  const [preloadedValues, setPreloadedValues] = useState();
   const navigate = useNavigate();
   const params = useParams();
 
   const {
-    store: { currentUser},
+    store: { currentUser },
   } = useContext(ExploreContext);
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await api.get(`posts/${params.post_id}`);
+//   //   get the post being edited from the backend and use it for preloaded values
+//   useEffect(() => {
+//     // async function fetchData() {
+//     //   const res = await api.get(`posts/${params.post_id}`);
+//     api.get(`posts/${params.post_id}`).then((res) => {
+//       setPost(res.data);
+//       setPreloadedValues({
+//         title: `${res.data.title}` ,
+//         destination: 'helllo',
+//         descriprion: 'bye',
+//       });
+//     });
+//     // }
+//     // fetchData();
+//   }, []);
 
-      setPost(res.data);
-    }
-    fetchData();
-  }, []);
+useEffect(() => {
 
-  const preloadedValues = {
-      title: `${post.title}`,
-      description: `${post.description}`,
-      destination: `${post.destination}`,
-      tags: `${post.tags}`
-  }
+})
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({defaultValues: preloadedValues});
+  } = useForm({ defaultValues: preloadedValues });
 
   function onSubmit(data) {
-    const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
     const formData = new FormData();
-    // split tags from string into an array of strings
-    const tagArray = data.tags.split(/[\s,]+/);
-    formData.append('image_url', file);
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('destination', data.destination);
-    formData.append('tags', tagArray);
-    console.log(cookies.tokenCookie);
-    console.log(currentUser)
 
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
-        'Authorization': `Bearer ${cookies.tokenCookie}`,
+        Authorization: `Bearer ${cookies.tokenCookie}`,
       },
     };
-    axios.post(url, formData, config).then((response) => {
-      console.log(response)
-    });
+    api
+      .post(`profile/${post.user_id}/posts/${post.id}`, formData, config)
+      .then((response) => {
+        console.log(response);
+      });
     navigate(`/post/${params.post_id}`);
   }
 
-  return (
+  return post ? (
     <Container>
       <div className="formCard">
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +88,7 @@ function UpdatePost() {
           <Form.Group>
             <Form.Label> Description </Form.Label>
             <Form.Control
-              type="text"
+              type="textarea"
               id="description"
               name="description"
               placeholder="Description"
@@ -125,18 +124,20 @@ function UpdatePost() {
             {errors.tags && <p></p>}
           </Form.Group>
 
-          <Form.Group>
+          {/* <Form.Group>
             <Form.Label> Image </Form.Label>
             <Form.Control
               type="file"
               onChange={(e) => setFile(e.target.files[0])}
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Button type="submit"> Upload </Button>
         </Form>
       </div>
     </Container>
+  ) : (
+    <p></p>
   );
 }
 
