@@ -21,6 +21,7 @@ export default function SignIn() {
   const { dispatch } = useContext(ExploreContext);
   const [serverError, setServerError] = useState();
   const [cookies, setCookie] = useCookies(['tokenCookie']);
+  const [authError, setAuthError] = useState('');
 
   function onSubmit(data) {
     api
@@ -37,16 +38,34 @@ export default function SignIn() {
           console.log(error);
         });
 
+    console.log(data);
+
+    api
+      .post('http://localhost:5500/auth/login', data)
+      .then((response) => {
+        dispatch({
+          // store the user information that was returned with the response in global store
+          type: 'setCurrentUser',
+          data: response.data.user,
+        });
+        // store accessToken extracted from response in a cookie
+        setCookie('tokenCookie', response.data.accessToken);
+        console.log(cookies.tokenCookie);
+
         navigate('/');
       })
       .catch(function (error) {
-        if (error) {
-          // setServerError(error);
-          console.log(error)
+        if (error.message === 'Request failed with status code 404') {
+          setAuthError('Your username or password are incorrect, please try again');
+        }
+        console.log(error);
+        console.log(error.message);
+        if (error.response) {
+          setServerError(error.response.data);
         } else if (error.request) {
-          // console.log(error.request);
+          console.log(error.request);
         } else {
-          // console.log('Error', error.message);
+          console.log('Error', error.message);
         }
       });
   }
@@ -55,7 +74,7 @@ export default function SignIn() {
     <Container maxWidth="sm">
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1> Sign In </h1>
-        {serverError && <Alert variant="danger"> {serverError} </Alert>}
+        {authError && <Alert variant="danger"> {authError} </Alert>}
         <Form.Group>
           <Form.Label>Username</Form.Label>
           <Form.Control
