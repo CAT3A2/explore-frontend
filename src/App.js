@@ -23,7 +23,7 @@ import api from './api';
 
 function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
-  const [cookies] = useCookies(['tokenCookie']);
+  const [cookies, setCookies] = useCookies(['tokenCookie']);
 
   useEffect(() => {
     async function fetchData() {

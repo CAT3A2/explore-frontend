@@ -11,7 +11,7 @@ import ExploreContext from '../ExploreContext';
 import api from './../api'
 
 function CreatePost() {
-  const [cookies] = useCookies(['tokenCookie']);
+  const [cookies, setCookies] = useCookies(['tokenCookie']);
   const [file, setFile] = useState();
   const navigate = useNavigate();
 

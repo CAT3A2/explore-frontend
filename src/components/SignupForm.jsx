@@ -16,7 +16,7 @@ function SignupForm() {
   const { dispatch } = useContext(ExploreContext);
   const [file, setFile] = useState();
   const [serverError, setServerError] = useState();
-  const [setCookie] = useCookies(['tokenCookie']);
+  const [cookies, setCookie] = useCookies(['tokenCookie']);
 
   let navigate = useNavigate();
 

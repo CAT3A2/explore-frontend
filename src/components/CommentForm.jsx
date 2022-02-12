@@ -10,7 +10,7 @@ import ExploreContext from '../ExploreContext';
 import api from './../api'
 
 export default function CommentForm({ post_id, user_id }) {
-  const [cookies] = useCookies(['tokenCookie']);
+  const [cookies, setCookie] = useCookies(['tokenCookie']);
   const {
     register,
     handleSubmit,

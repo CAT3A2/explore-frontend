@@ -19,7 +19,7 @@ export default function Post() {
   const navigate = useNavigate();
   const params = useParams();
   const [post, setPost] = useState();
-  const [cookies] = useCookies(['tokenCookie']);
+  const [cookies, setCookies] = useCookies(['tokenCookie']);
   const [comments, setComments] = useState([]);
   const {
     store: { currentUser },
