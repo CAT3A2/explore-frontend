@@ -70,7 +70,7 @@ function CreatePost() {
           <Form.Group>
             <Form.Label> Description </Form.Label>
             <Form.Control
-              type="text"
+              type="textarea"
               id="description"
               name="description"
               placeholder="Description"

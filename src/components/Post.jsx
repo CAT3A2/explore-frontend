@@ -10,11 +10,10 @@ import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
-import CommentForm from './CommentForm';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 
 import api from './../api';
+import CommentForm from './CommentForm';
 
 export default function Post() {
   const navigate = useNavigate();

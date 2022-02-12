@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import ExploreContext from '../ExploreContext';
 import { useCookies } from 'react-cookie';
+
+import ExploreContext from '../ExploreContext';
+
 
 import api from './../api'
 

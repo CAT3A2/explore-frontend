@@ -24,7 +24,6 @@ export default function Post({ post, userObj }) {
   if (user) {
     ({ username, avatar, user_id } = user);
   } else {
-    console.log(userObj)
     ({ username, avatar, user_id } = userObj);
   }
 
