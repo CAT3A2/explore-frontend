@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -24,24 +25,9 @@ export default function SignIn() {
   const [authError, setAuthError] = useState('');
 
   function onSubmit(data) {
+
     api
       .post('auth/login', data)
-      .then((response) => {
-        console.log(data);
-        dispatch({
-          // store the user information that was returned with the response in global store
-          type: 'setCurrentUser',
-          data: response.data.user,
-        });
-        // store accessToken extracted from response in a cookie
-        setCookie('tokenCookie', response.data.accessToken).catch((error) => {
-          console.log(error);
-        });
-
-    console.log(data);
-
-    api
-      .post('http://localhost:5500/auth/login', data)
       .then((response) => {
         dispatch({
           // store the user information that was returned with the response in global store
