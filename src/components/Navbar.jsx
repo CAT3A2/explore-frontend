@@ -26,6 +26,8 @@ export default function SearchAppBar() {
     setCookie('tokenCookie', '');
   };
 
+  console.log(currentUser)
+
   return (
     <Navbar bg="light" expand="lg" className="mb-5">
       <Container>

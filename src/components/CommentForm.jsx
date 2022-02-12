@@ -22,7 +22,7 @@ export default function CommentForm({ post_id, user_id }) {
 
   async function onSubmit(data) {
     console.log(data);
-    const url = `http://localhost:5500/posts/${post_id}/comment`;
+    const url = `http://localhost:5500/posts/${post_id}/comment/${currentUser.user_id}`;
 
     // need to send currentUser
 

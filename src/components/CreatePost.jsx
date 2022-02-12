@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -101,7 +100,7 @@ function CreatePost() {
               name="tags"
               placeholder="Tags"
               // validation
-              {...register('tags', { required: true })}
+              {...register('tags', { required: false })}
             />
             {errors.tags && <p></p>}
           </Form.Group>

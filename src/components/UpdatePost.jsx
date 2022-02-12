@@ -11,15 +11,18 @@ import ExploreContext from '../ExploreContext';
 
 function UpdatePost() {
   const [cookies, setCookies] = useCookies(['tokenCookie']);
-  //   const [file, setFile] = useState();
-  const [post, setPost] = useState();
+//   const [file, setFile] = useState();
+//   const [post, setPost] = useState();
   const [preloadedValues, setPreloadedValues] = useState();
   const navigate = useNavigate();
   const params = useParams();
 
   const {
-    store: { currentUser },
+    store: { posts },
   } = useContext(ExploreContext);
+
+  const post = posts.find((post) => post.post_id === params.post_id);
+  console.log(params.post_id)
 
 //   //   get the post being edited from the backend and use it for preloaded values
 //   useEffect(() => {
@@ -36,10 +39,6 @@ function UpdatePost() {
 //     // }
 //     // fetchData();
 //   }, []);
-
-useEffect(() => {
-
-})
 
   const {
     register,
