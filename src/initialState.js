@@ -1,15 +1,16 @@
 const initialState = {
-    currentUser: null,
-    // authToken: null,
+  currentUser: null,
+  // authToken: null,
+  posts: [],
+  searchedPosts: [],
+  users: [],
+  user: {
     posts: [],
-    users: [],
-    user: {
-      posts: [],
-      id: null,
-      username: "",
-      followers: [],
-      followees: []
-    }
-  }
+    id: null,
+    username: '',
+    followers: [],
+    followees: [],
+  },
+};
 
-export default initialState
+export default initialState;

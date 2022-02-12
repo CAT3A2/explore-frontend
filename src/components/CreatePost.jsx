@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 import ExploreContext from '../ExploreContext';
-import api from './../api'
+import api from './../api';
 
 function CreatePost() {
   const [cookies, setCookies] = useCookies(['tokenCookie']);
@@ -21,7 +21,7 @@ function CreatePost() {
   } = useForm();
 
   const {
-    store: { currentUser},
+    store: { currentUser },
   } = useContext(ExploreContext);
 
   function onSubmit(data) {
@@ -34,16 +34,17 @@ function CreatePost() {
     formData.append('description', data.description);
     formData.append('destination', data.destination);
     formData.append('tags', tagArray);
-    console.log(cookies.tokenCookie);
-    console.log(currentUser)
+    // console.log(cookies.tokenCookie);
+    // console.log(currentUser);
 
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
-        'Authorization': `Bearer ${cookies.tokenCookie}`,
+        Authorization: `Bearer ${cookies.tokenCookie}`,
       },
     };
     api.post(`profile/${currentUser.user_id}/posts`, formData, config).then((response) => {
+      console.log(response);
       navigate('/');
     });
   }
@@ -107,10 +108,7 @@ function CreatePost() {
 
           <Form.Group>
             <Form.Label> Image </Form.Label>
-            <Form.Control
-              type="file"
-              onChange={(e) => setFile(e.target.files[0])}
-            />
+            <Form.Control type="file" onChange={(e) => setFile(e.target.files[0])} />
           </Form.Group>
 
           <Button type="submit"> Upload </Button>

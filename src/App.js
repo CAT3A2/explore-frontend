@@ -36,7 +36,7 @@ function App() {
     fetchData();
   }, []);
 
-  // when global state is cleared out and token in cookies is still present, 
+  // when global state is cleared out and token in cookies is still present,
   // get the logged in user from server and save them in currentUser
   useEffect(() => {
     async function fetchUser() {
@@ -61,7 +61,7 @@ function App() {
     fetchUser();
   }, []);
 
-  const { posts } = store;
+  const { posts, searchedPosts } = store;
 
   return (
     <ExploreContext.Provider value={{ store, dispatch }}>
@@ -70,6 +70,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Posts posts={posts} />} />
+            <Route path="/search" element={<Posts posts={searchedPosts} />} />
             <Route path="/followers" element={<Followers />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
