@@ -25,10 +25,12 @@ function CreatePost() {
   } = useContext(ExploreContext);
 
   function onSubmit(data) {
+
     // const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
     const formData = new FormData();
     // split tags from string into an array of strings
     const tagArray = data.tags.split(/[\s,]+/);
+    console.log(tagArray)
     formData.append('image_url', file);
     formData.append('title', data.title);
     formData.append('description', data.description);

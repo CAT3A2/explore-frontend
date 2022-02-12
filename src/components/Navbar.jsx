@@ -6,9 +6,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 import { useCookies } from 'react-cookie';
 import api from '../api.js';
+import './../style/navbar.css'
 
 import ExploreContext from '../ExploreContext';
 
@@ -41,27 +43,29 @@ export default function SearchAppBar() {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="mb-5">
+    <Navbar bg="light" expand="lg" className="mb-5" className="ml-auto">
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/">Home</Link>
+            <Link to="/" className="link bigger">Explore</Link>
 
-            <Link to="/about">About</Link>
+            <Link to="/about" className="link bigger" >About</Link>
             <form onSubmit={searchPosts}>
               <input type="text" name="search" onChange={changeHandler} />
-              <Link to="/search" onClick={searchPosts}>
+              <Link to="/search" onClick={searchPosts} className="link">
+                <Button>
                 Search
+                </Button>
               </Link>
             </form>
             {currentUser ? (
               <NavDropdown title={currentUser.username} id="basic-nav-dropdown">
                 <NavDropdown.Item>
-                  <Link to={`profile/${currentUser.user_id}`}>My profile</Link>
+                  <Link to={`profile/${currentUser.user_id}`} className="link">My profile</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/post/new">
-                  <Link to="/post/new">Create post</Link>
+                  <Link to="/post/new" className="link">Create post</Link>
                 </NavDropdown.Item>
                 {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
                 <NavDropdown.Divider />
@@ -71,11 +75,11 @@ export default function SearchAppBar() {
               </NavDropdown>
             ) : (
               <div>
-                <Button>
-                  <Link to="/signin">Sign In</Link>
+                <Button variant="outlined">
+                  <Link to="/signin" className="link">Sign In</Link>
                 </Button>
-                <Button>
-                  <Link to="/signup">Sign Up</Link>
+                <Button variant="outlined">
+                  <Link to="/signup" className="link">Sign Up</Link>
                 </Button>
               </div>
             )}

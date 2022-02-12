@@ -9,7 +9,7 @@ import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import ExploreContext from '../ExploreContext';
-// import axios from 'axios';
+
 import api from './../api'
 
 export default function Post({ post, userObj }) {
@@ -20,6 +20,9 @@ export default function Post({ post, userObj }) {
   const [allLikes, setAllLikes] = useState([]);
   let { post_id, image_url, description, tags, title, likes, user } = post;
   let username, avatar, user_id;
+  let tagsArr = tags[0].name.split(',')
+
+
   
   if (user) {
     ({ username, avatar, user_id } = user);
@@ -64,7 +67,7 @@ export default function Post({ post, userObj }) {
             <Col xs={8}>
               <Card.Title> {title} </Card.Title>
               <Card.Text>{description}</Card.Text>
-              <Card.Text>{tags.map((tag) => `#${tag.name} `)}</Card.Text>
+              <Card.Text>{tagsArr.map((tag) => `#${tag} `)}</Card.Text>
             </Col>
             <Col xs={2}>
               {currentUser ? (

@@ -11,8 +11,8 @@ import ExploreContext from '../ExploreContext';
 
 function UpdatePost() {
   const [cookies, setCookies] = useCookies(['tokenCookie']);
-//   const [file, setFile] = useState();
-//   const [post, setPost] = useState();
+  //   const [file, setFile] = useState();
+    const [post, setPost] = useState();
   const [preloadedValues, setPreloadedValues] = useState();
   const navigate = useNavigate();
   const params = useParams();
@@ -21,24 +21,31 @@ function UpdatePost() {
     store: { posts },
   } = useContext(ExploreContext);
 
-  const post = posts.find((post) => post.post_id === params.post_id);
-  console.log(params.post_id)
+//   const post = posts.find((post) => post.post_id == params.post_id);
+  setPost((post) => post.post_id == params.post_id);
 
-//   //   get the post being edited from the backend and use it for preloaded values
-//   useEffect(() => {
-//     // async function fetchData() {
-//     //   const res = await api.get(`posts/${params.post_id}`);
-//     api.get(`posts/${params.post_id}`).then((res) => {
-//       setPost(res.data);
-//       setPreloadedValues({
-//         title: `${res.data.title}` ,
-//         destination: 'helllo',
-//         descriprion: 'bye',
-//       });
-//     });
-//     // }
-//     // fetchData();
-//   }, []);
+
+  setPreloadedValues({
+    title: `${post.title}`,
+    destination: 'helllo',
+    descriprion: 'bye',
+  });
+
+  //   //   get the post being edited from the backend and use it for preloaded values
+  //   useEffect(() => {
+  //     // async function fetchData() {
+  //     //   const res = await api.get(`posts/${params.post_id}`);
+  //     api.get(`posts/${params.post_id}`).then((res) => {
+  //       setPost(res.data);
+  //       setPreloadedValues({
+  //         title: `${res.data.title}` ,
+  //         destination: 'helllo',
+  //         descriprion: 'bye',
+  //       });
+  //     });
+  //     // }
+  //     // fetchData();
+  //   }, []);
 
   const {
     register,
