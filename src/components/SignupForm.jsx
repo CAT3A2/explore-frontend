@@ -27,7 +27,6 @@ function SignupForm() {
   } = useForm();
 
   async function onSubmit(data) {
-    const url = 'http://localhost:5500/auth/signup';
     const formData = new FormData();
     formData.append('avatar', file);
     formData.append('username', data.username);
@@ -41,7 +40,7 @@ function SignupForm() {
     };
 
     api
-      .post(url, formData, config)
+      .post(formData, config)
       .then(function (response) {
  
         dispatch({
