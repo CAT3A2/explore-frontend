@@ -144,7 +144,6 @@ We had a scrum meeting every Monday, notes can be found on our Trello board. We 
 - React Router Dom - is a library for React that allows the implementation of dynamic routing. React is a single page application, so changing routes does not necessarily make a new request to the server, but that when we change the route, React injects a component to dynamically render on the page. 
 - React is a front-end framework used to create web applications. React makes it easy for the web pages to be dynamic and responsive. Instead of pages React applications consist of components which get rendered when a certain route is hit. 
 - React-cookie is a cookie library for React and inherits it’s features straight from universal-cookie library. It makes using cookies very easy in React, making them globally accessible without any hassle. 
-stateReducer???
 - MUI is a UI library for React. According to their website, it provides a robust, customizable, and accessible library of foundational and advanced components, enabling developers to build the design system and develop React applications faster.
 - Bootstrap is also a UI library for React. It is very similar to bootstrap and can be used for html files. It uses components instead of classes. 
 - React-hook-form. According to logrocket.com React Hook Form is a library that helps you validate forms in React. It is a minimal library without any other dependencies, while being performant and straightforward to use, requiring developers to write fewer lines of code than other form libraries.

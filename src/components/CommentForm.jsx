@@ -21,9 +21,6 @@ export default function CommentForm({ post_id, user_id }) {
   } = useContext(ExploreContext);
 
   async function onSubmit(data) {
-    console.log(data);
-    const url = `http://localhost:5500/posts/${post_id}/comment/${currentUser.user_id}`;
-
     // need to send currentUser
 
     const config = {
@@ -33,7 +30,6 @@ export default function CommentForm({ post_id, user_id }) {
     };
 
     api.post(`posts/${post_id}/comment`, data, config).then((response) => {
-      console.log('afrter');
     });
   }
 
@@ -49,7 +45,7 @@ export default function CommentForm({ post_id, user_id }) {
           // validation
           {...register('comment', { required: true })}
         />
-        {errors.coment && <p className="error-message"> Required </p>}
+        {errors.comment && <p className="error-message"> Required </p>}
       </Form.Group>
       <Button type="submit"> Comment </Button>
     </Form>
