@@ -12,24 +12,30 @@ import ExploreContext from '../ExploreContext';
 
 import api from './../api'
 
-export default function Post({ post, userObj }) {
+// component for rendering posts without comments
+export default function PostCard({ post, userObj }) {
+
+  // get currentUser from global store
   const {
     store: { currentUser },
   } = useContext(ExploreContext);
 
   const [allLikes, setAllLikes] = useState([]);
+  // destructuring user and post
   let { post_id, image_url, description, tags, title, likes, user } = post;
   let username, avatar, user_id;
   let tagsArr = tags[0].name.split(',')
 
 
-  
+  // is user was deconstructed from post, deconstruct it
   if (user) {
     ({ username, avatar, user_id } = user);
+    // else deconstruct user info from userObj
   } else {
     ({ username, avatar, user_id } = userObj);
   }
 
+  // set the likes for the post
   useEffect(() => {
     async function fetchData() {
       setAllLikes(likes);
@@ -37,6 +43,7 @@ export default function Post({ post, userObj }) {
     fetchData();
   }, []);
 
+  // when like button is clicked, like gets added to that post
   const addLike = () => {
     api
       .post(`posts/${post_id}/like`, {

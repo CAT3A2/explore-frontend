@@ -25,6 +25,7 @@ function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
   const [cookies, setCookies] = useCookies(['tokenCookie']);
 
+  // get all the posts for showing on home page
   useEffect(() => {
     async function fetchData() {
       const res = await api.get('posts/all');
@@ -49,7 +50,6 @@ function App() {
         };
 
         api.get('auth/me', config).then(function (response) {
-          // console.log(response);
           dispatch({
             // store the user information that was returned with the response in global store
             type: 'setCurrentUser',

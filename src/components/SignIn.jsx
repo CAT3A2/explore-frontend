@@ -26,6 +26,7 @@ export default function SignIn() {
 
   function onSubmit(data) {
 
+    // when user logs in, JWT is stored in a cookie and user information to global state
     api
       .post('auth/login', data)
       .then((response) => {

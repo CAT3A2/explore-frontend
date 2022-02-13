@@ -1,0 +1,11 @@
+.banner {
+    background-image: url("./../img/beach.jpg");
+    height: 400px;
+
+}
+
+p {
+ color: white;
+ font-size: 62px;
+
+}

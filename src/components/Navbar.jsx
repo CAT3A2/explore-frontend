@@ -10,11 +10,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from '@mui/material/Button';
 import { useCookies } from 'react-cookie';
 import api from '../api.js';
-import './../style/navbar.css'
+import './../style/navbar.css';
 
 import ExploreContext from '../ExploreContext';
 
 export default function SearchAppBar() {
+  
   const {
     store: { currentUser },
     dispatch,
@@ -34,7 +35,9 @@ export default function SearchAppBar() {
     setSearchedContent(e.target.value);
   };
   const searchPosts = async () => {
-    const res = await api.get(`http://localhost:5500/posts/?search=${searchedContent}`);
+    const res = await api.get(
+      `http://localhost:5500/posts/?search=${searchedContent}`
+    );
     console.log(res);
     dispatch({
       type: 'setSearchedPost',
@@ -48,24 +51,30 @@ export default function SearchAppBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/" className="link bigger">Explore</Link>
+            <Link to="/" className="link bigger">
+              Explore
+            </Link>
 
-            <Link to="/about" className="link bigger" >About</Link>
+            <Link to="/about" className="link bigger">
+              About
+            </Link>
             <form onSubmit={searchPosts}>
               <input type="text" name="search" onChange={changeHandler} />
               <Link to="/search" onClick={searchPosts} className="link">
-                <Button>
-                Search
-                </Button>
+                <Button>Search</Button>
               </Link>
             </form>
             {currentUser ? (
               <NavDropdown title={currentUser.username} id="basic-nav-dropdown">
                 <NavDropdown.Item>
-                  <Link to={`profile/${currentUser.user_id}`} className="link">My profile</Link>
+                  <Link to={`profile/${currentUser.user_id}`} className="link">
+                    My profile
+                  </Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/post/new">
-                  <Link to="/post/new" className="link">Create post</Link>
+                  <Link to="/post/new" className="link">
+                    Create post
+                  </Link>
                 </NavDropdown.Item>
                 {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
                 <NavDropdown.Divider />
@@ -76,10 +85,14 @@ export default function SearchAppBar() {
             ) : (
               <div>
                 <Button variant="outlined">
-                  <Link to="/signin" className="link">Sign In</Link>
+                  <Link to="/signin" className="link">
+                    Sign In
+                  </Link>
                 </Button>
                 <Button variant="outlined">
-                  <Link to="/signup" className="link">Sign Up</Link>
+                  <Link to="/signup" className="link">
+                    Sign Up
+                  </Link>
                 </Button>
               </div>
             )}

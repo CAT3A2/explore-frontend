@@ -26,7 +26,7 @@ function CreatePost() {
 
   function onSubmit(data) {
 
-    // const url = `http://localhost:5500/profile/${currentUser.user_id}/posts`;
+    // use FormData to handle files, append the rest of the input
     const formData = new FormData();
     // split tags from string into an array of strings
     const tagArray = data.tags.split(/[\s,]+/);
@@ -36,8 +36,6 @@ function CreatePost() {
     formData.append('description', data.description);
     formData.append('destination', data.destination);
     formData.append('tags', tagArray);
-    // console.log(cookies.tokenCookie);
-    // console.log(currentUser);
 
     const config = {
       headers: {
