@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 
 import PostCard from './PostCard';
 
+// this component takes an array of posts and outputs them in PostCard component
 export default function Posts( {posts, userObj} ) {
 
   return !posts?.length ? (

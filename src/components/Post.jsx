@@ -58,14 +58,16 @@ export default function Post() {
         <Container>
           <Row>
             <Col xs={2}>
+              <Link to={`/profile/${post.user.user_id}`}>
               <Avatar alt={post.user.username} src={post.user.avatar} />
+              </Link>
               <p>{post.user.username}</p>
             </Col>
             <Col xs={8}>
               <Card.Title> {post.title} </Card.Title>
               <Card.Text>{post.description}</Card.Text>
               <Card.Text>
-                <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
+              <Card.Text>{post.tags.map((tag) => `#${tag.name} `)}</Card.Text>
               </Card.Text>
             </Col>
             <Col xs={2}>
@@ -78,7 +80,7 @@ export default function Post() {
               <Col>
                 <Button onClick={deletePost}>Delete Post</Button>
                 <Button>
-                  <Link to={`/post/${post.post_id}/update`}>Edit</Link>
+                  <Link to={`/post/${post.post_id}/update`} className="link">Edit</Link>
                 </Button>
               </Col>
             )}

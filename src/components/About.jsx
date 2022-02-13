@@ -7,7 +7,7 @@ import './../style/about.css'
 export default function About() {
   return (
     <>
-      <Container className="banner"><p>EXPLORE</p></Container>
+      <Container className="banner"><p className="explore">EXPLORE</p></Container>
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
           <Accordion.Header>What is this app for?</Accordion.Header>
