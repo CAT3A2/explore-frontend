@@ -40,7 +40,7 @@ function SignupForm() {
     };
 
     api
-      .post(formData, config)
+      .post('auth/signup', formData, config)
       .then(function (response) {
  
         dispatch({
