@@ -33,7 +33,7 @@ export default function Profile() {
           <Container>
             <Row>
               <Col xs={2}>
-                <Avatar alt="{username}" src={user.avatar} sx={{ width: 56, height: 56 }}/>
+                <Avatar alt="{username}" src={user?.avatar} sx={{ width: 56, height: 56 }}/>
               </Col>
               <Col xs={8}>
                 <Card.Title> {user.username} </Card.Title>
